@@ -22,6 +22,9 @@
         .flex {
             display: flex;
         }
+        #familyid {
+            display: none;
+        }
     </style>
 </head>
 
@@ -51,12 +54,13 @@
                             </tr>
                             <tr>
                                 <th>Password:</th>
-                                <td><input type="password" required name="password" placeholder="Password..." /></td>
+                                <td><input type="password" id="password" required name="password" placeholder="Password..."/></td>
                             </tr>
                             <tr>
                                 <th>Confirm Password:</th>
-                                <td><input type="password" required name="confirmPassword" placeholder="Confirm Password..." /></td>
+                                <td><input type="password" id="confirm_password" required name="confirmPassword" placeholder="Confirm Password..."  onkeyup="check();"/></td>
                             </tr>
+                            <tr<td id="errormessage"> ></td></tr>
                         </table>
                     </div>
                     <div class="right">
@@ -70,13 +74,13 @@
                                 </td>
                                 <td>
                                     <label>
-                                        <input type="radio" name="parentOrChild" value="child" required />
+                                        <input id="childRadio" type="radio" name="parentOrChild" value="child" required />
                                         Child
                                     </label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><strong>Family ID:</strong><input type="number" placeholder="Family ID." /></td>
+                            <tr >
+                                <td id="familyid"><strong>Family ID:</strong><input type="number" placeholder="Family ID." /></td>
                             </tr>
                             <tr>
                                 <td>
@@ -120,6 +124,24 @@
         </div>
     </div>
     <script>
+        var check = function() {
+            if (document.getElementById('password').value ==
+                document.getElementById('confirm_password').value) {
+                document.getElementById('errormessage').style.color = 'green';
+                document.getElementById('errormessage').innerHTML = 'passwords match';
+            } else {
+                document.getElementById('errormessage').style.color = 'red';
+                document.getElementById('errormessage').innerHTML = 'passwords do not match';
+            }
+        }
+        let familyidElem = document.getElementById('familyid');
+        let childRadioElem = document.getElementById('childRadio');
+        
+        function displayFamilyID() {
+            if (!childRadioElem.checked) familyidElem.style.display = "none";
+            else familyidElem.style.display = "block";
+        }
+        document.forms["registerForm"]["parentOrChild"].forEach((radioElement) => {radioElement.addEventListener("click", displayFamilyID);});
         function validateForms(event) {
             event.preventDefault(); //Don't submit form
             //Check whether register or login form
