@@ -1,60 +1,5 @@
 <!DOCTYPE html>
 
-<style>
-    .score {
-        text-align: right;
-    }
-    
-    .nametitle {
-        text-align: left;
-    }
-    
-    .flexpool {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .card {
-        flex: 0 0 250px;
-        background-color: white;
-        margin: .5rem;
-        border-radius: 10px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23)
-    }
-    
-    .card img {
-        border-radius: 10px 10px 0 0;
-    }
-    
-    .card h2 {
-        padding: .5rem 1rem;
-    }
-    
-    .card p {
-        padding: .5rem 1rem;
-    }
-    /* main {
-    flex: 1;
-    } */
-    
-    html {
-        height: 100%;
-    }
-    
-    .container {
-        display: flex;
-        height: 100%;
-    }
-    
-    .container section.a {
-        flex-basis: 300px;
-    }
-    
-    .container section.b {
-        flex: 1;
-    }
-</style>
 <html>
 
 <head>
@@ -72,9 +17,79 @@
             text-align: left;
         }
     </style>
+    <style>
+        .score {
+            text-align: right;
+        }
+        
+        .nametitle {
+            text-align: left;
+        }
+        
+        .flexpool {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .card {
+            flex: 0 0 250px;
+            background-color: white;
+            margin: .5rem;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23)
+        }
+        
+        .card img {
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .card h2 {
+            padding: .5rem 1rem;
+        }
+        
+        .card p {
+            padding: .5rem 1rem;
+        }
+        /* main {
+        flex: 1;
+        } */
+        
+        html {
+            height: 100%;
+        }
+        
+        .container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+        
+        .container section.a {
+            flex-basis: 300px;
+        }
+        
+        .container section.b {
+            flex: 1;
+        }
+    </style>
+
 </head>
 
 <body>
+    <!--Navbar-->
+    <ul>
+        <li><a class="active" href="home.html" title="Dashboard">Dashboard</a></li>
+        <li><a href="" title="Notifications">Notifications</a></li>
+        <li><a href="" title="Rewards">Rewards</a></li>
+        <!--Add sign out functionality-->
+        <li style="float:right"><a id="signOutButton" href="#" title="Sign Out">Sign Out</a></li>
+    </ul>
+
     <div class="container">
         <section class="a">
             <h1>Leaderboard</h1>
@@ -90,82 +105,108 @@
             </table>
         </section>
 
-
-        <!--Navbar-->
-        <ul>
-            <li><a class="active" href="home.html" title="Dashboard">Dashboard</a></li>
-            <li><a href="" title="Notifications">Notifications</a></li>
-            <li><a href="" title="Rewards">Rewards</a></li>
-            <!--Add sign out functionality-->
-            <li style="float:right"><a id="signOutButton" href="#" title="Sign Out">Sign Out</a></li>
-        </ul>
-
-        <!--[BEGIN]PARENTS ONLY-->
-        <style></style>
-        <button id="createNewRewardButtonForModal">+ Add Reward</button>
-        <div id="createNewRewardModal" class="modal-background">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="mainForm">
-                    <form action="" name="createNewRewardForm">
-                        <table>
-                            <tr>
-                                <th>Reward Name:</th>
-                                <td><input type="text" name="rewardName" /></td>
-                            </tr>
-                            <tr>
-                                <th>Reward Description:</th>
-                                <td><textarea name="rewardDescription"></textarea></td>
-                            </tr>
-                            <tr>
-                                <th>Price:</th>
-                                <td><input type="number" name="pointValue" /></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center;" colspan="2"><input type="submit" value="Add Reward" /></td>
-                                <!--BACKEND: Once reward is added, close modal-->
-                            </tr>
-                        </table>
-                    </form>
+        <section class="b">
+            <h1>Rewards</h1><br />
+            <!--[BEGIN]PARENTS ONLY-->
+            <button id="createNewRewardButtonForModal">+ Add Reward</button>
+            <div id="createNewRewardModal" class="modal-background">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="mainForm">
+                        <form action="" name="createNewRewardForm">
+                            <table>
+                                <tr>
+                                    <th>Reward Name:</th>
+                                    <td><input type="text" name="rewardName" /></td>
+                                </tr>
+                                <tr>
+                                    <th>Reward Description:</th>
+                                    <td><textarea name="rewardDescription"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th>Price:</th>
+                                    <td><input type="number" name="pointValue" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;" colspan="2"><input type="submit" value="Add Reward" /></td>
+                                    <!--BACKEND: Once reward is added, close modal-->
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script>
-            var createNewRewardButtonForModal = document.querySelector("#createNewRewardButtonForModal");
-            var createNewRewardModal = document.querySelector("#createNewRewardModal");
-            var closeButton = document.querySelector(".close");
-            createNewRewardButtonForModal.onclick = () => {
-                createNewRewardModal.style.display = "block";
-            };
-            closeButton.onclick = () => {
-                createNewRewardModal.style.display = "none";
-            };
-        </script>
-        <!--[END]PARENTS ONLY-->
+            <script>
+                var createNewRewardButtonForModal = document.querySelector("#createNewRewardButtonForModal");
+                var createNewRewardModal = document.querySelector("#createNewRewardModal");
+                var closeButton = document.querySelector(".close");
+                createNewRewardButtonForModal.onclick = () => {
+                    createNewRewardModal.style.display = "block";
+                };
+                closeButton.onclick = () => {
+                    createNewRewardModal.style.display = "none";
+                };
+            </script>
+            <!--[END]PARENTS ONLY-->
 
-
-
-        <div class="wrapper">
-            <section class="b">
-                <h1>Rewards</h1><br>
-                <div class="flexpool">
-
-                    <div class="card">
-                        <!-- Card 1 -->
-                        <img src="" alt="reward">
-                        <h2>{REWARD NAME}</h2>
-                        <p>{REWARD DESCRIPTION}</p>
-                    </div>
-                    <div class="card">
-                        <!-- Card 1 -->
-                        <img src="" alt="reward">
-                        <h2>{REWARD NAME}</h2>
-                        <p>{REWARD DESCRIPTION}</p>
-                    </div>
-
+            <div class="flexpool">
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
                 </div>
-            </section>
-        </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+                <div class="card">
+                    <!-- Card 1 -->
+                    <img src="" alt="reward" />
+                    <h2>{REWARD NAME}</h2>
+                    <p>{REWARD DESCRIPTION}</p>
+                </div>
+
+            </div>
+        </section>
     </div>
 </body>
 
