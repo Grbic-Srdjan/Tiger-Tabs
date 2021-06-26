@@ -7,7 +7,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="theme.css" />
     <style>
         body {
             margin: 0;
@@ -73,6 +73,50 @@
         <!--Add sign out functionality-->
         <li style="float:right"><a id="signOutButton" href="#" title="Sign Out">Sign Out</a></li>
     </ul>
+
+    <!--[BEGIN]PARENTS ONLY-->
+    <style></style>
+    <button id="createNewTaskButtonForModal">+</button>
+    <div id="createNewTaskModal" class="modal-background">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="mainForm">
+                <form action="" name="createNewTaskForm">
+                    <table>
+                        <tr>
+                            <th>Task Name:</th>
+                            <td><input type="text" name="taskName" /></td>
+                        </tr>
+                        <tr>
+                            <th>Task Description:</th>
+                            <td><textarea name="taskDescription"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>Amount of Points:</th>
+                            <td><input type="number" name="pointValue" /></td>
+                        </tr>
+                        <tr>
+                            <th>Deadline:</th>
+                            <td><input type="date" name="deadline" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" /></td>
+                            <!--BACKEND: Once task is added, close modal-->
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        var createNewTaskButtonForModal = document.querySelector("#createNewTaskButtonForModal");
+        var createNewTaskModal = document.querySelector("#createNewTaskModal");
+        var closeButton = document.querySelector("")
+        createNewTaskButtonForModal.onclick = () => {
+            createNewTaskModal.style.display = "block";
+        };
+    </script>
+    <!--[END]PARENTS ONLY-->
 
 
     <!--This table will only show -->
