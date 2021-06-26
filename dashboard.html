@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul {
+            /*position: absolute;*/
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            width: 100%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        
+        li {
+            float: left;
+        }
+        
+        li a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        li a:hover {
+            background-color: green;
+        }
+        
+        .active {
+            background-color: rgb(13, 95, 15);
+        }
+        
+        .tasksTable {
+            border-collapse: collapse;
+        }
+        
+        .tasksTable td {
+            border: 2px solid black;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex div {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--Navbar-->
+    <ul>
+        <li><a class="active" href="home.html" title="Dashboard">Dashboard</a></li>
+        <li><a href="" title="Notifications">Notifications</a></li>
+        <li><a href="" title="Rewards">Rewards</a></li>
+        <!--Add sign out functionality-->
+        <li style="float:right"><a id="signOutButton" href="#" title="Sign Out">Sign Out</a></li>
+    </ul>
+
+
+    <!--This table will only show -->
+    <table class="tasksTable">
+        <tr>
+            <th>Active Tasks:</th>
+        </tr>
+        <!--Practice data - Child-->
+        <tr>
+            <td>
+                <div class="flex">
+                    <div>Task Title</div>
+                    <div>Task Description</div>
+                    <div><button>&checkmark;</button></div>
+                </div>
+            </td>
+        </tr>
+        <!--Practice data - Parent-->
+        <tr>
+            <td>
+                <div class="flex">
+                    <div>Task Title</div>
+                    <div>Task Description</div>
+                    <div><button>&times;</button></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <!--This table will show the rest of the tasks not in the previous table-->
+    <table class="tasksTable">
+        <tr>
+            <th>Tasks In Progress:</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="flex">
+                    <div>Task Title</div>
+                    <div>Task Description</div>
+                    <div>Task Status (who has it)</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
