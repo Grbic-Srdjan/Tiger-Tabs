@@ -24,9 +24,10 @@
             display: flex;
         }
         
-        #previewPFP {
+        #output_image {
             border-radius: 50%;
             border: 1px solid black;
+            max-width: 150px;
         }
     </style>
 </head>
@@ -89,12 +90,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="file" id="pfpImage" name="pfpImage" accept="image/png, image/jpeg" />
-                                    <input type="hidden" id="pfpImageData" name="pfpImageData" />
+                                    <input type="file" accept="image/png, image/jpeg" onchange="preview_image(event)">
                                 </td>
                                 <td>
                                     <!--Preview Image-->
-                                    <div id="previewPFP"></div>
+                                    <img id="output_image"/>
                                 </td>
                             </tr>
                         </table>
@@ -181,7 +181,14 @@
         }, false);
 
 
-
+        function preview_image(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('output_image');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
 
 
         function validateForms(event) {
