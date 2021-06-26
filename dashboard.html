@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="theme.css" />
@@ -22,7 +22,7 @@
 
     <!--[BEGIN]PARENTS ONLY-->
     <style></style>
-    <button id="createNewTaskButtonForModal">+</button>
+    <button id="createNewTaskButtonForModal">+ Add Task</button>
     <div id="createNewTaskModal" class="modal-background">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -46,7 +46,7 @@
                             <td><input type="date" name="deadline" /></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><input type="submit" /></td>
+                            <td style="text-align: center;" colspan="2"><input type="submit" value="Add Task" /></td>
                             <!--BACKEND: Once task is added, close modal-->
                         </tr>
                     </table>
@@ -57,9 +57,12 @@
     <script>
         var createNewTaskButtonForModal = document.querySelector("#createNewTaskButtonForModal");
         var createNewTaskModal = document.querySelector("#createNewTaskModal");
-        var closeButton = document.querySelector("")
+        var closeButton = document.querySelector(".close");
         createNewTaskButtonForModal.onclick = () => {
             createNewTaskModal.style.display = "block";
+        };
+        closeButton.onclick = () => {
+            createNewTaskModal.style.display = "none";
         };
     </script>
     <!--[END]PARENTS ONLY-->
