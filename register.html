@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="" />
+    <style>
+        .register.main,
+        .register.main .header,
+        .login.main,
+        .login.main .header {
+            text-align: center;
+        }
+        
+        .register.main {
+            display: none;
+        }
+        
+        .flex {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="register main">
+        <div class="header">
+            <h1>New Around Here?</h1>
+            <h2>Sign Up Here:</h2>
+            <p><a href="javascript:void(0);" onclick="document.querySelector('.register.main').style.display = 'none'; document.querySelector('.login.main').style.display = 'block';">Already Signed Up?</a></p>
+        </div>
+        <div class="mainForm">
+            <form action="" name="registerForm">
+                <div class="flex">
+                    <div class="left">
+                        <table>
+                            <tr>
+                                <th>Name:</th>
+                                <td><input type="text" required name="name" placeholder="Name..." /></td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td><input type="email" required name="email" placeholder="Email..." /></td>
+                            </tr>
+                            <tr>
+                                <th>Username:</th>
+                                <td><input type="text" required name="username" placeholder="Username..." /></td>
+                            </tr>
+                            <tr>
+                                <th>Password:</th>
+                                <td><input type="password" required name="password" placeholder="Password..." /></td>
+                            </tr>
+                            <tr>
+                                <th>Confirm Password:</th>
+                                <td><input type="password" required name="confirmPassword" placeholder="Confirm Password..." /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="right">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input type="radio" name="parentOrChild" value="parent" required />
+                                        Parent
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input type="radio" name="parentOrChild" value="child" required />
+                                        Child
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Family ID:</strong><input type="number" placeholder="Family ID." /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="file" id="pfpImage" name="pfpImage" accept="image/png, image/jpeg" />
+                                    <input type="hidden" id="pfpImageData" name="pfpImageData" />
+                                </td>
+                                <td>
+                                    <!--Preview Image-->
+                                    <div id="previewPFP"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <button>Register</button>
+            </form>
+        </div>
+    </div>
+    <div class="login main">
+        <div class="header">
+            <h1>Welcome Back,</h1>
+            <h2>Login Here:</h2>
+            <p><a href="javascript:void(0);" onclick="document.querySelector('.login.main').style.display = 'none'; document.querySelector('.register.main').style.display = 'block';">Don't Have An Account?</a></p>
+        </div>
+        <div class="mainForm">
+            <form action="" name="loginForm">
+                <table>
+                    <tr>
+                        <th>Username:</th>
+                        <td><input type="text" required name="name" placeholder="Name..." /></td>
+                    </tr>
+                    <tr>
+                        <th>Password:</th>
+                        <td><input type="email" required name="email" placeholder="Email..." /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button>Login</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script>
+        function validateForms(event) {
+            event.preventDefault(); //Don't submit form
+            //Check whether register or login form
+            var pfpImage = document.querySelector("#pfpImage");
+            var pfpImageFileSize = pfpImage.files.item(0).size;
+            if (Math.round(pfpImageFileSize / 1024) >= 5120) {
+                alert("Image file is too large, must be less than 5MB"); //Exit this and try again
+                return;
+            }
+            /**
+             * If register form
+             * make sure password and confirm password match
+             * make sure image is less than 5mb
+             */
+        }
+        //Add event listeners to both forms onsubmit
+        var mainForms = document.querySelectorAll(".mainForm form");
+        mainForms.forEach((mainForm) => {
+            mainForm.addEventListener("submit", validateForms);
+        });
+    </script>
+</body>
+
+</html>
