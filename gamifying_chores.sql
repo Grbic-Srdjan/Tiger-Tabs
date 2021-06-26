@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2021 at 03:29 PM
+-- Generation Time: Jun 26, 2021 at 04:56 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -81,13 +81,20 @@ CREATE TABLE `transactions` (
 
 CREATE TABLE `users` (
   `UserID` int(12) NOT NULL,
-  `FamilyID` int(12) NOT NULL,
+  `FamilyID` int(12) DEFAULT NULL,
   `ParentOrChild` int(1) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Username` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
   `UserLogo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`UserID`, `FamilyID`, `ParentOrChild`, `Email`, `Username`, `Password`, `UserLogo`) VALUES
+(1, 0, 0, 'testtestic2004@gmail.com', 'Test', 'TestTestic1!', 'Do not exist, currently. ');
 
 --
 -- Indexes for dumped tables
@@ -137,7 +144,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `UserID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
