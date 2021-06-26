@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Login/Register</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="" />
@@ -15,15 +15,18 @@
             text-align: center;
         }
         
-        .register.main {
+        .register.main,
+        #familyid {
             display: none;
         }
         
         .flex {
             display: flex;
         }
-        #familyid {
-            display: none;
+        
+        #previewPFP {
+            border-radius: 50%;
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -36,7 +39,7 @@
             <p><a href="javascript:void(0);" onclick="document.querySelector('.register.main').style.display = 'none'; document.querySelector('.login.main').style.display = 'block';">Already Signed Up?</a></p>
         </div>
         <div class="mainForm">
-            <form action="" name="registerForm">
+            <form action="" name="registerForm" onsubmit="validateForms()">
                 <div class="flex">
                     <div class="left">
                         <table>
@@ -54,13 +57,15 @@
                             </tr>
                             <tr>
                                 <th>Password:</th>
-                                <td><input type="password" id="password" required name="password" placeholder="Password..."/></td>
+                                <td><input type="password" id="password" required name="password" placeholder="Password..." /></td>
                             </tr>
                             <tr>
                                 <th>Confirm Password:</th>
-                                <td><input type="password" id="confirm_password" required name="confirmPassword" placeholder="Confirm Password..."  onkeyup="check();"/></td>
+                                <td><input type="password" id="confirm_password" required name="confirmPassword" placeholder="Confirm Password..." onkeyup="check();" /></td>
                             </tr>
-                            <tr<td id="errormessage"> ></td></tr>
+                            <tr>
+                                <td id="errormessage"></td>
+                            </tr>
                         </table>
                     </div>
                     <div class="right">
@@ -79,7 +84,7 @@
                                     </label>
                                 </td>
                             </tr>
-                            <tr >
+                            <tr>
                                 <td id="familyid"><strong>Family ID:</strong><input type="number" placeholder="Family ID." /></td>
                             </tr>
                             <tr>
@@ -95,7 +100,7 @@
                         </table>
                     </div>
                 </div>
-                <button>Register</button>
+                <input type="submit" />
             </form>
         </div>
     </div>
@@ -125,34 +130,69 @@
     </div>
     <script>
         var check = function() {
-            if (document.getElementById('password').value ==
-                document.getElementById('confirm_password').value) {
-                document.getElementById('errormessage').style.color = 'green';
-                document.getElementById('errormessage').innerHTML = 'passwords match';
+            var password = document.getElementById('password');
+            var confirm_password = document.getElementById('confirm_password');
+            var errormessage = document.getElementById('errormessage');
+            var returnVal = false;
+            if (password.value == confirm_password.value) {
+                errormessage.style.color = 'green';
+                errormessage.innerHTML = 'passwords match';
+                returnVal = true;
             } else {
-                document.getElementById('errormessage').style.color = 'red';
-                document.getElementById('errormessage').innerHTML = 'passwords do not match';
+                errormessage.style.color = 'red';
+                errormessage.innerHTML = 'passwords do not match';
             }
-        }
+            return returnVal;
+        };
         let familyidElem = document.getElementById('familyid');
         let childRadioElem = document.getElementById('childRadio');
-        
+
         function displayFamilyID() {
             if (!childRadioElem.checked) familyidElem.style.display = "none";
             else familyidElem.style.display = "block";
         }
-        document.forms["registerForm"]["parentOrChild"].forEach((radioElement) => {radioElement.addEventListener("click", displayFamilyID);});
-        function validateForms(event) {
-            event.preventDefault(); //Don't submit form
-            //Check whether register or login form
-            var pfpImage = document.querySelector("#pfpImage");
+        document.forms["registerForm"]["parentOrChild"].forEach((radioElement) => {
+            radioElement.addEventListener("click", displayFamilyID);
+        });
+
+
+
+
+        var pfpImage = document.querySelector("#pfpImage");
+        pfpImage.addEventListener("change", () => {
             var pfpImageFileSize = pfpImage.files.item(0).size;
             if (Math.round(pfpImageFileSize / 1024) >= 5120) {
                 alert("Image file is too large, must be less than 5MB"); //Exit this and try again
                 return;
             } else {
-
+                //Image is of size, proceed to canvas to get dataURL and send to server
+                var previewPFP = document.querySelector("#previewPFP");
+                var file = pfpImage.files[0];
+                var reader = new FileReader();
+                var result;
+                reader.addEventListener("load", () => {
+                    previewPFP.src = reader.result;
+                    result = reader.result;
+                }, false);
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
             }
+        }, false);
+
+
+
+
+
+        function validateForms(event) {
+            event.preventDefault(); //Don't submit form
+
+            if (!check()) {
+                //Passwords don't match we are leaving
+                alert("Passwords do not match, try again");
+                return;
+            }
+
             /**
              * If register form
              * make sure password and confirm password match
