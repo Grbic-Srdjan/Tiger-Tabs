@@ -6,7 +6,7 @@
     <title>Login/Register</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="theme.css" />
     <style>
         .register.main,
         .register.main .header,
@@ -27,7 +27,8 @@
         #output_image {
             border-radius: 50%;
             border: 1px solid black;
-            max-width: 150px;
+            max-width: 75px;
+            max-height: 75px;
         }
     </style>
 </head>
@@ -90,17 +91,17 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="file" accept="image/png, image/jpeg" onchange="preview_image(event)">
+                                    <input type="file" accept="image/png, image/jpeg" onchange="preview_image(event)" />
                                 </td>
                                 <td>
                                     <!--Preview Image-->
-                                    <img id="output_image"/>
+                                    <img id="output_image" />
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </div>
-                <input type="submit" />
+                <input type="submit" value="Register Now!" />
             </form>
         </div>
     </div>
@@ -119,10 +120,10 @@
                     </tr>
                     <tr>
                         <th>Password:</th>
-                        <td><input type="email" required name="email" placeholder="Email..." /></td>
+                        <td><input type="password" required name="password" placeholder="Password..." /></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><button>Login</button></td>
+                        <td colspan="2"><input type="submit" value="Login" /></td>
                     </tr>
                 </table>
             </form>
@@ -159,7 +160,7 @@
 
 
         var pfpImage = document.querySelector("#pfpImage");
-        pfpImage.addEventListener("change", () => {
+        /*pfpImage.addEventListener("change", () => {
             var pfpImageFileSize = pfpImage.files.item(0).size;
             if (Math.round(pfpImageFileSize / 1024) >= 5120) {
                 alert("Image file is too large, must be less than 5MB"); //Exit this and try again
@@ -179,15 +180,22 @@
                 }
             }
         }, false);
-
+*/
 
         function preview_image(event) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById('output_image');
-                output.src = reader.result;
+            var pfpImageFileSize = event.target.files.item(0).size;
+            if (Math.round(pfpImageFileSize / 1024) >= 5120) {
+                alert("Image file is too large, must be less than 5MB"); //Exit this and try again
+                return;
+            } else {
+                //Image is of size
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var output = document.getElementById('output_image');
+                    output.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
             }
-            reader.readAsDataURL(event.target.files[0]);
         }
 
 

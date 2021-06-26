@@ -39,7 +39,8 @@ CREATE TABLE `families` (
 
 CREATE TABLE `points` (
   `UserID` int(12) NOT NULL,
-  `AmountOfPoints` int(8) NOT NULL
+  `CurrentPoints` int(8) NOT NULL,
+  `TotalPoints` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
