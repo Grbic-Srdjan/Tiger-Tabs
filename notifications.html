@@ -6,13 +6,22 @@
     <link rel="stylesheet" href="theme.css" />
 </head>
 
-<body>
-    <h2>Notifications</h2><button>Clear All</button>
+<body class="mainApp">
+    <!--Navbar-->
+    <ul class="nav">
+        <li><a href="dashboard.html" title="Dashboard">Dashboard</a></li>
+        <li><a class="active" href="" title="Notifications">Notifications</a></li>
+        <li><a href="leaderboard.html" title="Leaderboard/Rewards">Leaderboard/Rewards</a></li>
+        <!--Add sign out functionality-->
+        <li style="float:right"><a id="signOutButton" href="#" title="Sign Out">Sign Out</a></li>
+    </ul>
+
+    <h2>Notifications</h2>
     <p>To be approved - ONLY FOR PARENTS</p>
     <ul>
-        <li>Sample: {CHILD NAME} has completed {TASK NAME} <button>&checkmark;</button><button>&times;</button><button>Clear</button></li>
+        <li>Sample: {CHILD NAME} has completed {TASK NAME} <button class="icon" alt="Accept Task"><i class="fas fa-check"></i></button>&nbsp;<button class="icon" alt="Reject Task"><i class="fas fa-times"></i></button></li>
     </ul>
-    <p>Activity</p>
+    <p>Activity <button>Clear All</button></p>
     <ul>
         <li>Sample: {CHILD NAME} has accepted {TASK NAME} <button>Clear</button></li>
     </ul>

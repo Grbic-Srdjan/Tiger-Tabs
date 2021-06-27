@@ -8,84 +8,14 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="theme.css" />
-    <style>
-        .score {
-            text-align: right;
-        }
-        
-        .nametitle {
-            text-align: left;
-        }
-    </style>
-    <style>
-        .score {
-            text-align: right;
-        }
-        
-        .nametitle {
-            text-align: left;
-        }
-        
-        .flexpool {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .card {
-            flex: 0 0 250px;
-            background-color: white;
-            margin: .5rem;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23)
-        }
-        
-        .card img {
-            border-radius: 10px 10px 0 0;
-        }
-        
-        .card h2 {
-            padding: .5rem 1rem;
-        }
-        
-        .card p {
-            padding: .5rem 1rem;
-        }
-        /* main {
-        flex: 1;
-        } */
-        
-        html {
-            height: 100%;
-        }
-        
-        .container {
-            display: flex;
-            height: 100%;
-            width: 100%;
-            justify-content: center;
-            align-items: flex-start;
-            flex-direction: row;
-            flex-wrap: nowrap;
-        }
-        
-        .container section.a {
-            flex-basis: 300px;
-        }
-        
-        .container section.b {
-            flex: 1;
-        }
-    </style>
-
 </head>
 
-<body>
+<body class="mainApp">
     <!--Navbar-->
-    <ul>
-        <li><a class="active" href="home.html" title="Dashboard">Dashboard</a></li>
-        <li><a href="" title="Notifications">Notifications</a></li>
-        <li><a href="" title="Rewards">Rewards</a></li>
+    <ul class="nav">
+        <li><a href="dashboard.html" title="Dashboard">Dashboard</a></li>
+        <li><a href="notifications.html" title="Notifications">Notifications</a></li>
+        <li><a href="" class="active" title="Leaderboard/Rewards">Leaderboard/Rewards</a></li>
         <!--Add sign out functionality-->
         <li style="float:right"><a id="signOutButton" href="#" title="Sign Out">Sign Out</a></li>
     </ul>
@@ -108,7 +38,7 @@
         <section class="b">
             <h1>Rewards</h1><br />
             <!--[BEGIN]PARENTS ONLY-->
-            <button id="createNewRewardButtonForModal">+ Add Reward</button>
+            <button id="createNewRewardButtonForModal"><span><i class="far fa-edit"></i> Add Reward</span></button>
             <div id="createNewRewardModal" class="modal-background">
                 <div class="modal-content">
                     <span class="close">&times;</span>
@@ -155,59 +85,17 @@
                     <img src="" alt="reward" />
                     <h2>{REWARD NAME}</h2>
                     <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
-                </div>
-                <div class="card">
-                    <!-- Card 1 -->
-                    <img src="" alt="reward" />
-                    <h2>{REWARD NAME}</h2>
-                    <p>{REWARD DESCRIPTION}</p>
+                    <p>{POINT VALUE}</p>
+                    <!-- CHILDREN ONLY -->
+                    <button>BUY</button> 
                 </div>
 
             </div>
         </section>
     </div>
+    <img id="trash_girl" src="img/trash_girl.png" />
+    <img id="moneybags_dad" src="img/moneybags_dad.png" />
+
 </body>
 
 </html>
