@@ -10,6 +10,11 @@ input[type=date]:hover {
     cursor: pointer;
 }
 
+.mainApp {
+    background-image: linear-gradient(to bottom right, #f85f1b, #b71200);
+    background-attachment: fixed;
+}
+
 
 /*------------------------------------Styles for nav bar------------------------------------------*/
 
@@ -42,11 +47,11 @@ li a {
 }
 
 li a:hover {
-    background-color: green;
+    background-color: #f13924;
 }
 
 .active {
-    background-color: rgb(13, 95, 15);
+    background-color: #b71200;
 }
 
 
@@ -155,3 +160,8 @@ li a:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+
+/**/
+
+#ffb279
