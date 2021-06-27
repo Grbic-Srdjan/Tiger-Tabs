@@ -1,0 +1,21 @@
+.register.main,
+.register.main .header,
+.login.main,
+.login.main .header {
+    text-align: center;
+}
+
+.register.main,
+#familyid {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+#output_image {
+    border-radius: 50%;
+    border: 1px solid black;
+    max-width: 150px;
+}

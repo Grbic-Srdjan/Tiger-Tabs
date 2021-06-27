@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    /*position: absolute;*/
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    width: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: green;
+}
+
+.active {
+    background-color: rgb(13, 95, 15);
+}
+
+.tasksTable {
+    border-collapse: collapse;
+}
+
+.tasksTable td {
+    border: 2px solid black;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex div {
+    margin-left: 15px;
+    margin-right: 15px;
+}
