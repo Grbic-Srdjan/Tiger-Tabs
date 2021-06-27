@@ -16,6 +16,7 @@ input[type=date]:hover {
 }
 
 
+
 /*------------------------------------Styles for nav bar------------------------------------------*/
 
 body {
@@ -104,6 +105,46 @@ li a:hover {
     margin-right: 15px;
 }
 
+/*----------------------------------------leaderboard.html---------------------------------------------*/
+.score {
+    text-align: right;
+}
+.nametitle {
+    text-align: left;
+}
+.flexpool {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card {
+    flex: 0 0 250px;
+    background-color: white;
+    margin: .5rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23)
+}
+.card img {
+    border-radius: 10px 10px 0 0;
+}
+.card h2 {
+    padding: .5rem 1rem;
+}
+.card p {
+    padding: .5rem 1rem;
+}
+html {
+    height: 100%;
+}
+.container {
+    display: flex;
+    height: 100%;
+}
+.container section.a {
+    flex-basis: 300px;
+}
+.container section.b {
+    flex: 1;
 
 /*Modal*/
 
