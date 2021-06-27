@@ -22,10 +22,10 @@
 
     <div class="container">
         <section class="a">
-            <h1>Leaderboard</h1>
+            <h1>Leaderboard:</h1>
             <table>
                 <tr>
-                    <th class="nametitle">Name</th>
+                    <th class="nametitle">Name"</th>
                     <th>Score</th>
                 </tr>
                 <tr>
@@ -36,7 +36,7 @@
         </section>
 
         <section class="b">
-            <h1>Rewards</h1><br />
+            <h1>Rewards:</h1><br />
             <!--[BEGIN]PARENTS ONLY-->
             <button id="createNewRewardButtonForModal"><span><i class="far fa-edit"></i> Add Reward</span></button>
             <div id="createNewRewardModal" class="modal-background">
@@ -47,18 +47,18 @@
                             <table>
                                 <tr>
                                     <th>Reward Name:</th>
-                                    <td><input type="text" name="rewardName" /></td>
+                                    <td><input type="text" name="rewardName" placeholder="Reward Name..." /></td>
                                 </tr>
                                 <tr>
                                     <th>Reward Description:</th>
-                                    <td><textarea name="rewardDescription"></textarea></td>
+                                    <td><textarea name="rewardDescription" placeholder="Reward Description...."></textarea></td>
                                 </tr>
                                 <tr>
                                     <th>Price:</th>
-                                    <td><input type="number" name="pointValue" /></td>
+                                    <td><input type="number" name="pointValue" placeholder="Points..." /></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;" colspan="2"><input type="submit" value="Add Reward" /></td>
+                                    <td style="text-align: center;" colspan="2"><button class="button" type="submit"><span>Add Reward</span></button></td>
                                     <!--BACKEND: Once reward is added, close modal-->
                                 </tr>
                             </table>
@@ -80,14 +80,16 @@
             <!--[END]PARENTS ONLY-->
 
             <div class="flexpool">
+                <!--Dump all prize cards here, sort from lowest price (top) to highest price (bottom)-->
                 <div class="card">
                     <!-- Card 1 -->
-                    <img src="" alt="reward" />
+                    <img alt="reward" />
                     <h2>{REWARD NAME}</h2>
                     <p>{REWARD DESCRIPTION}</p>
                     <p>{POINT VALUE}</p>
                     <!-- CHILDREN ONLY -->
-                    <button>BUY</button> 
+                    <button class="button"><span>Purchase</span></button>
+                    <!--Make this button disabled if they cannot afford this-->
                 </div>
 
             </div>

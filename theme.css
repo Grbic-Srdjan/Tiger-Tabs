@@ -15,6 +15,7 @@ input[type=date]:hover {
 }
 
 input,
+textarea,
 button {
     font-family: "Source Sans Pro", sans-serif;
 }
@@ -87,7 +88,8 @@ ul.nav {
     font-family: "Source Sans Pro", sans-serif;
 }
 
-.login.mainForm, .register.mainForm {
+.login .mainForm,
+.register .mainForm {
     border: 3px solid rgb(146, 150, 146);
     border: 3px solid rgba(0, 0, 0, 0.6);
     padding: 40px;
@@ -110,24 +112,30 @@ ul.nav {
 
 .mainForm th,
 .mainForm input,
+.mainForm textarea,
 .mainForm button,
 .mainForm label {
     font-size: 1.5rem;
 }
 
-.modal-content.mainForm {
-    color: black;
-}
-
 .main h1 {
     font-size: 3rem;
 }
+
 .main h2 {
     font-size: 2.5rem;
 }
 
 .mainForm th {
     text-align: right;
+}
+
+.mainForm input[type=text],
+.mainForm input[type=password],
+.mainForm input[type=number],
+.mainForm input[type=date],
+.mainForm textarea {
+    width: 300px;
 }
 
 .mainForm input[type=submit] {
@@ -146,8 +154,9 @@ ul.nav {
 #output_image {
     border-radius: 50%;
     border: 1px solid black;
-    max-width: 75px;
-    max-height: 75px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
 }
 
 #trash_girl {
@@ -220,7 +229,7 @@ ul.nav {
     color: red;
 }
 
-.accountButton,
+.button,
 #createNewTaskButtonForModal,
 #createNewRewardButtonForModal {
     padding: 10px;
@@ -236,14 +245,14 @@ ul.nav {
     transition: 1s;
 }
 
-.accountButton span,
+.button span,
 #createNewTaskButtonForModal span,
 #createNewRewardButtonForModal span {
     display: inline-block;
     transform: skew(20deg);
 }
 
-.accountButton:hover,
+.button:hover,
 #createNewTaskButtonForModal:hover,
 #createNewRewardButtonForModal:hover {
     color: white;
@@ -253,6 +262,10 @@ ul.nav {
 
 #createNewTaskButtonForModal {
     float: right;
+}
+
+.modal-content .mainForm {
+    color: black !important;
 }
 
 

@@ -58,33 +58,15 @@
                                 Child
                             </label>
                             <div id="familyid">
-                                <strong style="font-size: 1.5rem;">Family ID:</strong><input type="number" placeholder="Family ID." /></div>
+                                <strong style="font-size: 1.5rem;">Family ID:</strong><input type="number" placeholder="Family ID." />
+                            </div>
+                            <input type="file" accept="image/png, image/jpeg" onchange="preview_image(event)" />
                         </div>
-                        <table>
-                            <tr>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                            </tr>
-                            <tr>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="file" accept="image/png, image/jpeg" onchange="preview_image(event)" />
-                                </td>
-                                <td>
-                                    <!--Preview Image-->
-                                    <img id="output_image" />
-                                </td>
-                            </tr>
-                        </table>
+                        <!--Preview Image-->
+                        <img id="output_image" src="a.a" alt="Select an image" />
                     </div>
                 </div>
-                <button type="submit" class="accountButton"><span>Register Now!</span></button>
+                <button type="submit" class="button"><span>Register Now!</span></button>
             </form>
         </div>
     </div>
@@ -107,7 +89,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <button type="submit" class="accountButton"><span>Login</span></button>
+                            <button type="submit" class="button"><span>Login</span></button>
                         </td>
                     </tr>
                 </table>
@@ -168,6 +150,8 @@
 */
 
         function preview_image(event) {
+            var output = document.getElementById('output_image');
+            output.setAttribute("alt", "Loading...");
             var pfpImageFileSize = event.target.files.item(0).size;
             if (Math.round(pfpImageFileSize / 1024) >= 5120) {
                 alert("Image file is too large, must be less than 5MB"); //Exit this and try again
@@ -176,8 +160,8 @@
                 //Image is of size
                 var reader = new FileReader();
                 reader.onload = function() {
-                    var output = document.getElementById('output_image');
                     output.src = reader.result;
+                    output.setAttribute("alt", "Profile Picture");
                 }
                 reader.readAsDataURL(event.target.files[0]);
             }
