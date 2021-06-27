@@ -87,7 +87,7 @@ ul.nav {
     font-family: "Source Sans Pro", sans-serif;
 }
 
-.mainForm {
+.login.mainForm, .register.mainForm {
     border: 3px solid rgb(146, 150, 146);
     border: 3px solid rgba(0, 0, 0, 0.6);
     padding: 40px;
@@ -113,6 +113,17 @@ ul.nav {
 .mainForm button,
 .mainForm label {
     font-size: 1.5rem;
+}
+
+.modal-content.mainForm {
+    color: black;
+}
+
+.main h1 {
+    font-size: 3rem;
+}
+.main h2 {
+    font-size: 2.5rem;
 }
 
 .mainForm th {
