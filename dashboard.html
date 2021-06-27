@@ -10,109 +10,117 @@
     <link rel="stylesheet" href="theme.css" />
 </head>
 
-<body>
+<body class="mainApp">
     <!--Navbar-->
-    <ul>
-        <li><a class="active" href="home.html" title="Dashboard">Dashboard</a></li>
-        <li><a href="" title="Notifications">Notifications</a></li>
-        <li><a href="" title="Rewards">Rewards</a></li>
+    <ul class="nav">
+        <li><a class="active" href="" title="Dashboard">Dashboard</a></li>
+        <li><a href="notifications.html" title="Notifications">Notifications</a></li>
+        <li><a href="leaderboard.html" title="Leaderboard/Rewards">Leaderboard/Rewards</a></li>
         <!--Add sign out functionality-->
         <li style="float:right"><a id="signOutButton" href="#" title="Sign Out">Sign Out</a></li>
     </ul>
+    <div style="text-align: center;">
+        <br /><br />
+        <!--This table will only show -->
+        <table class="tasksTable">
+            <tr>
+                <th>
+                    Active Tasks:
+                    <!--[BEGIN]PARENTS ONLY-->
+                    <button id="createNewTaskButtonForModal"><span><i class="far fa-edit"></i> Add Task</span></button>
+                    <!--[END]PARENTS ONLY-->
+                </th>
+            </tr>
+            <!--Practice data - Child-->
+            <tr>
+                <td>
+                    <div class="flex">
+                        <div>Task Title</div>
+                        <div>Task Description</div>
+                        <div>Points</div>
+                        <div><button class="icon" alt="Accept Task"><i class="far fa-check-square"></i></button></div>
+                    </div>
+                </td>
+            </tr>
+            <!--Practice data - Parent-->
+            <tr>
+                <td>
+                    <div class="flex">
+                        <div>Task Title</div>
+                        <div>Task Description</div>
+                        <div>Points</div>
+                        <div><button class="icon" alt="Delete Task"><i class="far fa-trash-alt"></i></button></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!--[BEGIN]PARENTS ONLY-->
 
-    <!--[BEGIN]PARENTS ONLY-->
-    <style></style>
-    <button id="createNewTaskButtonForModal">+ Add Task</button>
-    <div id="createNewTaskModal" class="modal-background">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="mainForm">
-                <form action="" name="createNewTaskForm">
-                    <table>
-                        <tr>
-                            <th>Task Name:</th>
-                            <td><input type="text" name="taskName" /></td>
-                        </tr>
-                        <tr>
-                            <th>Task Description:</th>
-                            <td><textarea name="taskDescription"></textarea></td>
-                        </tr>
-                        <tr>
-                            <th>Amount of Points:</th>
-                            <td><input type="number" name="pointValue" /></td>
-                        </tr>
-                        <tr>
-                            <th>Deadline:</th>
-                            <td><input type="date" name="deadline" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center;" colspan="2"><input type="submit" value="Add Task" /></td>
-                            <!--BACKEND: Once task is added, close modal-->
-                        </tr>
-                    </table>
-                </form>
+        <div id="createNewTaskModal" class="modal-background">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="mainForm">
+                    <form action="" name="createNewTaskForm">
+                        <table>
+                            <tr>
+                                <th>Task Name:</th>
+                                <td><input type="text" name="taskName" /></td>
+                            </tr>
+                            <tr>
+                                <th>Task Description:</th>
+                                <td><textarea name="taskDescription"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th>Amount of Points:</th>
+                                <td><input type="number" name="pointValue" /></td>
+                            </tr>
+                            <tr>
+                                <th>Deadline:</th>
+                                <td><input type="date" name="deadline" /></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;" colspan="2"><input type="submit" value="Add Task" /></td>
+                                <!--BACKEND: Once task is added, close modal-->
+                            </tr>
+                        </table>
+                    </form>
+                </div>
             </div>
         </div>
+        <script>
+            var createNewTaskButtonForModal = document.querySelector("#createNewTaskButtonForModal");
+            var createNewTaskModal = document.querySelector("#createNewTaskModal");
+            var closeButton = document.querySelector(".close");
+            createNewTaskButtonForModal.onclick = () => {
+                createNewTaskModal.style.display = "block";
+            };
+            closeButton.onclick = () => {
+                createNewTaskModal.style.display = "none";
+            };
+        </script>
+        <!--[END]PARENTS ONLY-->
+
+
+        <br />
+        <!--This table will show the rest of the tasks not in the previous table-->
+        <table class="tasksTable">
+            <tr>
+                <th>Tasks In Progress:</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="flex">
+                        <div>Task Title</div>
+                        <div>Task Description</div>
+                        <div>Task Status (who has it)</div>
+                        <div>Points</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-    <script>
-        var createNewTaskButtonForModal = document.querySelector("#createNewTaskButtonForModal");
-        var createNewTaskModal = document.querySelector("#createNewTaskModal");
-        var closeButton = document.querySelector(".close");
-        createNewTaskButtonForModal.onclick = () => {
-            createNewTaskModal.style.display = "block";
-        };
-        closeButton.onclick = () => {
-            createNewTaskModal.style.display = "none";
-        };
-    </script>
-    <!--[END]PARENTS ONLY-->
-
-
-    <!--This table will only show -->
-    <table class="tasksTable">
-        <tr>
-            <th>Active Tasks:</th>
-        </tr>
-        <!--Practice data - Child-->
-        <tr>
-            <td>
-                <div class="flex">
-                    <div>Task Title</div>
-                    <div>Task Description</div>
-                    <div>Points</div>
-                    <div><button>&checkmark;</button></div>
-                </div>
-            </td>
-        </tr>
-        <!--Practice data - Parent-->
-        <tr>
-            <td>
-                <div class="flex">
-                    <div>Task Title</div>
-                    <div>Task Description</div>
-                    <div>Points</div>
-                    <div><button>&times;</button></div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <br />
-    <!--This table will show the rest of the tasks not in the previous table-->
-    <table class="tasksTable">
-        <tr>
-            <th>Tasks In Progress:</th>
-        </tr>
-        <tr>
-            <td>
-                <div class="flex">
-                    <div>Task Title</div>
-                    <div>Task Description</div>
-                    <div>Task Status (who has it)</div>
-                    <div>Points</div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <img id="trash_girl" src="img/trash_girl.png" />
+    <img id="moneybags_dad" src="img/moneybags_dad.png" />
 </body>
 
 </html>
