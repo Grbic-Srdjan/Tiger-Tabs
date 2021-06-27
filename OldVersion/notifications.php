@@ -29,7 +29,7 @@ if(isset($_SESSION["UserID"])){
         break;
       }
     }
-    
+
 }else{
     header('Location: register.php'); exit;
 }
@@ -53,7 +53,7 @@ if(isset($_SESSION["UserID"])){
 
         ?>
 
-        
+
     </ul>
     <p>Activity (List of Tasks)</p>
 

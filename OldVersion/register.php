@@ -2,14 +2,104 @@
 <html>
 
 <head>
+<?php
+require_once("connection.php");
+$msg = "";
+if( isset($_POST['parentOrChild'])  &&
+    isset($_POST['email'])  &&
+    isset($_POST['username'])  &&
+    isset($_POST['password']) ){
+
+    $ParentOrChild = $_POST['parentOrChild'];
+    $Email = $_POST['email'];
+    $Username = $_POST['username'];
+    $Password = $_POST['password'];
+
+    // Create connection
+    $conn = new mysqli(SERVER, USER, PASSWORD, DATABASE);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $target_dir = "uploads/";
+    $time = time();
+    $target_file = $target_dir . $time.basename($_FILES["pfpImage"]["name"]);
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+
+    //Check if email already exists
+    $sql0 = "SELECT UserID FROM users WHERE Email='$Email'";
+    $result = $conn->query($sql0);
+
+    if ($result->num_rows > 0) {
+        $msg = "Email ID already exists. Try different email ID.";
+    }else{
+        $familyID = 0;
+
+        $check = getimagesize($_FILES["pfpImage"]["tmp_name"]);
+        if($check !== false) {
+            if (move_uploaded_file($_FILES["pfpImage"]["tmp_name"], $target_file)) {
+                $pfpImage = $time.htmlspecialchars( basename( $_FILES["pfpImage"]["name"]));
+
+                $sql1 = "INSERT INTO users (ParentOrChild, Email, Username, Password, UserLogo)
+                VALUES ('$ParentOrChild', '$Email', '$Username', '$Password', '$pfpImage')";
+
+                if ($conn->query($sql1) === TRUE) {
+                    $UserID = mysqli_insert_id($conn);
+
+                    if($ParentOrChild == 0){
+                        $sql2 = "INSERT INTO points (UserID, AmountOfPoints)  VALUES ('$UserID', 0)";
+
+                        if($conn->query($sql2) === TRUE){
+                            $msg = "New record created successfully";
+                        }else{
+                            $msg = "Child created but Unable to add points";
+                        }
+                    }else{
+                        $msg = "New record created successfully";
+                    }
+                } else {
+                    $msg = "Server Error: Unable to add new record".$sql . "<br>" . $conn->error;
+                }
+            }
+
+        } else {
+            $msg = "File is not an image.";
+        }
+    }
+}
+?>
     <meta charset="utf-8">
     <title>Login/Register</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="" />
+    <style>
+        .register.main,
+        .register.main .header,
+        .login.main,
+        .login.main .header {
+            text-align: center;
+        }
+
+        .register.main,
+        #familyid {
+            display: none;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        #previewPFP {
+            border-radius: 50%;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
-<body class="radialBackground">
+<body>
     <div class="register main">
         <div class="header">
             <h1>New Around Here?</h1>
@@ -17,7 +107,7 @@
             <p><a href="javascript:void(0);" onclick="document.querySelector('.register.main').style.display = 'none'; document.querySelector('.login.main').style.display = 'block';">Already Signed Up?</a></p>
         </div>
         <div class="mainForm">
-            <form action="" name="registerForm" onsubmit="validateForms()">
+            <form method = "POST"  action="/web/Hackathon/register.php" name="registerForm" enctype="multipart/form-data" onsubmit="validateForms()">
                 <div class="flex">
                     <div class="left">
                         <table>
@@ -47,26 +137,41 @@
                         </table>
                     </div>
                     <div class="right">
-                        <div style="text-align: left;">
-                            <p style="margin-bottom: 0;">Are you a parent or a child?</p>
-                            <label>
-                                <input type="radio" name="parentOrChild" value="parent" required />
-                                Parent
-                            </label> &emsp;
-                            <label>
-                                <input id="childRadio" type="radio" name="parentOrChild" value="child" required />
-                                Child
-                            </label>
-                            <div id="familyid">
-                                <strong style="font-size: 1.5rem;">Family ID:</strong><input type="number" placeholder="Family ID." />
-                            </div>
-                            <input type="file" accept="image/png, image/jpeg" onchange="preview_image(event)" />
-                        </div>
-                        <!--Preview Image-->
-                        <img id="output_image" src="a.a" alt="Select an image" />
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input type="radio" name="parentOrChild" value="1" required />
+                                        Parent
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input id="childRadio" type="radio" name="parentOrChild" value="0" required />
+                                        Child
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="familyid"><strong>Family ID:</strong><input type="number" placeholder="Family ID." /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="file" id="pfpImage" name="pfpImage" accept="image/png, image/jpeg" />
+                                    <input type="hidden" id="pfpImageData" name="pfpImageData" />
+                                </td>
+                                <td>
+                                    <!--Preview Image-->
+                                    <div id="previewPFP"></div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                <button type="submit" class="button"><span>Register Now!</span></button>
+                <button name = "MakeYourAccount">Make your account.. </button>
+                <h2><?php echo $msg; ?></h2>
+
+
             </form>
         </div>
     </div>
@@ -77,62 +182,20 @@
             <p><a href="javascript:void(0);" onclick="document.querySelector('.login.main').style.display = 'none'; document.querySelector('.register.main').style.display = 'block';">Don't Have An Account?</a></p>
         </div>
         <div class="mainForm">
-            <form method = "POST" action = "#" name="loginForm">
+            <form action="" name="loginForm">
                 <table>
                     <tr>
                         <th>Username:</th>
-                        <td><input type="text" required name="uname" placeholder="Name..." /></td>
+                        <td><input type="text" required name="name" placeholder="Name..." /></td>
                     </tr>
                     <tr>
                         <th>Password:</th>
-                        <td><input type="password" required name="Pass" placeholder="Password..." /></td>
+                        <td><input type="email" required name="email" placeholder="Email..." /></td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <button name ="LogInButton" type="submit" class="button"><span>Login</span></button>
-                        </td>
+                        <td colspan="2"><button>Login</button></td>
                     </tr>
                 </table>
-                <?php
-                  if(isset($_POST['LogInButton'])){
-                    echo "Button is pressed. ";
-                    $Username = $_POST['uname'];
-                    $Password = $_POST['Pass'];
-
-                    $Query = "SELECT * FROM users WHERE username = '$Username' and password = '$Password'";
-                    $Result = mysqli_query($Link, $Query) or die ("There was an error while trying to log you in, here :( . Plase try again later on. )");
-
-                    $RowNumber = $Result -> num_rows;
-
-                    if($RowNumber > 0){
-
-                      $Row = mysqli_fetch_row($Result);
-
-                      $UserID = $Row[0];
-                      $FamilyID = $Row[1];
-                      $ParentOrChild = $Row[2];
-                      $Email = $Row[3];
-                      $UsernameOfUser = $Row[4];
-                      $PasswordOfUser = $Row[5];
-                      $UserLogo = $Row[6];
-
-                      $_SESSION['userid'] = $UserID;
-                      $_SESSION['familyid'] = $FamilyID;
-                      $_SESSION['parentorchild'] = $ParentOrChild;
-                      $_SESSION['email'] = $Email;
-                      $_SESSION['username'] = $UsernameOfUser;
-                      $_SESSION['password'] = $Password;
-                      $_SESSION['userlogo'] = $UserLogo;
-
-                      header("Location: dashboard.php");
-
-                    }
-                    else{
-                      echo "You entered wrong E-mail or Password! ";
-                    }
-
-                  }
-                ?>
             </form>
         </div>
     </div>
@@ -167,7 +230,7 @@
 
 
         var pfpImage = document.querySelector("#pfpImage");
-        /*pfpImage.addEventListener("change", () => {
+        pfpImage.addEventListener("change", () => {
             var pfpImageFileSize = pfpImage.files.item(0).size;
             if (Math.round(pfpImageFileSize / 1024) >= 5120) {
                 alert("Image file is too large, must be less than 5MB"); //Exit this and try again
@@ -187,35 +250,20 @@
                 }
             }
         }, false);
-*/
 
-        function preview_image(event) {
-            var output = document.getElementById('output_image');
-            output.setAttribute("alt", "Loading...");
-            var pfpImageFileSize = event.target.files.item(0).size;
-            if (Math.round(pfpImageFileSize / 1024) >= 5120) {
-                alert("Image file is too large, must be less than 5MB"); //Exit this and try again
-                return;
-            } else {
-                //Image is of size
-                var reader = new FileReader();
-                reader.onload = function() {
-                    output.src = reader.result;
-                    output.setAttribute("alt", "Profile Picture");
-                }
-                reader.readAsDataURL(event.target.files[0]);
-            }
-        }
+
+
 
 
         function validateForms(event) {
-            event.preventDefault(); //Don't submit form
+            // event.preventDefault(); //Don't submit form
 
             if (!check()) {
                 //Passwords don't match we are leaving
                 alert("Passwords do not match, try again");
-                return;
+                return false;
             }
+
 
             /**
              * If register form
@@ -223,15 +271,13 @@
              * make sure image is less than 5mb
              */
         }
+
         //Add event listeners to both forms onsubmit
         var mainForms = document.querySelectorAll(".mainForm form");
         mainForms.forEach((mainForm) => {
             mainForm.addEventListener("submit", validateForms);
         });
     </script>
-    <img id="trippy_twisty_tabs" src="img/trippy_twisty_tabsCropped.png" />
-    <img id="trash_girl" src="img/trash_girl.png" />
-    <img id="moneybags_dad" src="img/moneybags_dad.png" />
 </body>
 
 </html>
