@@ -175,6 +175,16 @@ ul.nav {
     z-index: -10000000;
 }
 
+#trippy_twisty_tabs {
+    position: fixed;
+    top: 0px;
+    margin: 0 auto;
+    left: 50%;
+    margin-left: -20%;
+    max-width: 40%;
+    z-index: -10000000;
+}
+
 
 /*----------------------------------------Dashboard.html---------------------------------------------*/
 
