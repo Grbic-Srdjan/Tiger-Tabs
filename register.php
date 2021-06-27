@@ -77,60 +77,19 @@
             <p><a href="javascript:void(0);" onclick="document.querySelector('.login.main').style.display = 'none'; document.querySelector('.register.main').style.display = 'block';">Don't Have An Account?</a></p>
         </div>
         <div class="mainForm">
-            <form method = "POST" action = "<?=$_SERVER['PHP_SELF']?>" name="loginForm">
+            <form action="" name="loginForm">
                 <table>
                     <tr>
                         <th>Username:</th>
-                        <td><input type="text" required name="uname" placeholder="Name..." /></td>
+                        <td><input type="text" required name="name" placeholder="Name..." /></td>
                     </tr>
                     <tr>
                         <th>Password:</th>
-                        <td><input type="password" required name="Pass" placeholder="Password..." /></td>
+                        <td><input type="password" required name="password" placeholder="Password..." /></td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <button name ="LogInButton" type="submit" class="button" onclick="buttonPressed()"><span>Login</span></button>
-                            <?php
-
-                              if(isset($_POST['LogInButton'])){
-                                echo "Button is pressed. ";
-                                $Username = $_POST['uname'];
-                                $Password = $_POST['Pass'];
-
-                                $Query = "SELECT * FROM users WHERE username = '$Username' and password = '$Password'";
-                                $Result = mysqli_query($Link, $Query) or die ("There was an error while trying to log you in, here :( . Plase try again later on. )");
-
-                                $RowNumber = $Result -> num_rows;
-
-                                if($RowNumber > 0){
-
-                                  $Row = mysqli_fetch_row($Result);
-
-                                  $UserID = $Row[0];
-                                  $FamilyID = $Row[1];
-                                  $ParentOrChild = $Row[2];
-                                  $Email = $Row[3];
-                                  $UsernameOfUser = $Row[4];
-                                  $PasswordOfUser = $Row[5];
-                                  $UserLogo = $Row[6];
-
-                                  $_SESSION['userid'] = $UserID;
-                                  $_SESSION['familyid'] = $FamilyID;
-                                  $_SESSION['parentorchild'] = $ParentOrChild;
-                                  $_SESSION['email'] = $Email;
-                                  $_SESSION['username'] = $UsernameOfUser;
-                                  $_SESSION['password'] = $Password;
-                                  $_SESSION['userlogo'] = $UserLogo;
-
-                                  header("Location: dashboard.php");
-
-                                }
-                                else{
-                                  echo "You entered wrong E-mail or Password! ";
-                                }
-
-                              }
-                            ?>
+                            <button type="submit" class="button"><span>Login</span></button>
                         </td>
                     </tr>
                 </table>
@@ -138,9 +97,6 @@
         </div>
     </div>
     <script>
-        function buttonPressed(){
-            return true;
-        }
         var check = function() {
             var password = document.getElementById('password');
             var confirm_password = document.getElementById('confirm_password');
